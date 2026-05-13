@@ -156,3 +156,62 @@ class InterviewDetailView(APIView):
 
         serializer = InterviewSerializer(interview)
         return DRFResponse(serializer.data)
+    
+class AnalyticsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        interviews = Interview.objects.filter(
+            user=request.user, status='completed'
+        ).order_by('started_at')
+
+        # Score over time
+        score_trend = []
+        for iv in interviews:
+            scored = [r for r in iv.responses.all() if r.clarity_score]
+            if scored:
+                avg = sum((r.clarity_score + r.technical_score + r.communication_score) / 3 for r in scored) / len(scored)
+                score_trend.append({
+                    'date': iv.started_at.strftime('%b %d'),
+                    'score': round(avg, 1),
+                    'role': iv.question_set.role,
+                    'topic': iv.question_set.topic,
+                })
+
+        # Per dimension averages
+        all_scored = []
+        for iv in interviews:
+            all_scored.extend([r for r in iv.responses.all() if r.clarity_score])
+
+        dimensions = {}
+        if all_scored:
+            dimensions = {
+                'clarity': round(sum(r.clarity_score for r in all_scored) / len(all_scored), 1),
+                'technical': round(sum(r.technical_score for r in all_scored) / len(all_scored), 1),
+                'communication': round(sum(r.communication_score for r in all_scored) / len(all_scored), 1),
+            }
+
+        # Topic performance
+        topic_scores = {}
+        for iv in interviews:
+            topic = iv.question_set.topic
+            scored = [r for r in iv.responses.all() if r.clarity_score]
+            if scored:
+                avg = sum((r.clarity_score + r.technical_score + r.communication_score) / 3 for r in scored) / len(scored)
+                if topic not in topic_scores:
+                    topic_scores[topic] = []
+                topic_scores[topic].append(avg)
+
+        topic_avg = [
+            {'topic': t, 'score': round(sum(v) / len(v), 1)}
+            for t, v in topic_scores.items()
+        ]
+        topic_avg.sort(key=lambda x: x['score'])
+
+        return DRFResponse({
+            'total_interviews': interviews.count(),
+            'score_trend': score_trend,
+            'dimensions': dimensions,
+            'topic_performance': topic_avg,
+            'weak_topics': topic_avg[:2] if len(topic_avg) >= 2 else topic_avg,
+        })
