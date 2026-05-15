@@ -1,5 +1,0 @@
-axios 
-react-router-dom 
-tailwindcss 
-@tailwindcss/vite
-recharts
