@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-!j!xs6(e&=4x)vs5!dmg-_$u7m$u%@wc9=nw+&6=&r%(n2)i7l"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -183,3 +184,7 @@ ALLOWED_HOSTS = ['*']  # we'll tighten this after deployment
 
 # CORS for production — update after you get your Vercel URL
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+
+# Add whitenoise to middleware — must be right after SecurityMiddleware
