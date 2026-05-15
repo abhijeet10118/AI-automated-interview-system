@@ -172,4 +172,4 @@ MIT License — free to use, modify and distribute.
 
 ---
 
-<p align="center">Built with by Abhijeet <a href="https://github.com/abhijeet10118">Abhijeet Sandilya</a></p>
+<p align="center">Built by Abhijeet <a href="https://github.com/abhijeet10118">Abhijeet Sandilya</a></p>
