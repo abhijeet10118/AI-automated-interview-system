@@ -3,11 +3,11 @@ import logo from './interview_logo.png'
 
 export default function Logo({ size = 'md', linkTo = '/' }) {
   const sizes = {
-    sm: 'h-8',
-    md: 'h-10',
-    lg: 'h-14',
-    xl: 'h-20',
-  }
+  sm: 'h-12',   // was h-8
+  md: 'h-14',   // was h-10
+  lg: 'h-20',   // was h-14
+  xl: 'h-28',   // was h-20
+}
 
   return (
     <Link to={linkTo} className="inline-flex items-center group">

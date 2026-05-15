@@ -116,7 +116,7 @@ export default function InterviewSession() {
   <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #0a0a1a, #0d1b3e, #1a0a2e)' }}>
     <div className="flex flex-col items-center justify-center gap-4">
        <div className="flex flex-col items-center justify-center gap-4">
-  <img src={logo} alt="Interview AI" className="h-24 w-auto object-contain animate-pulse" />
+  <img src={logo} alt="Interview AI" className="h-32 w-auto object-contain animate-pulse" />
   <p className="text-sm" style={{ color: 'rgba(255,255,255,0.4)' }}>Loading your interview...</p>
 </div>
       </div>

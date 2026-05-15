@@ -91,7 +91,7 @@ export default function Login() {
         {/* Logo — tighter on mobile */}
         <div className="text-center mb-5 sm:mb-8">
           <Link to="/home" className="inline-flex items-center justify-center group">
-  <img src={logo} alt="Interview AI" className="h-20 w-auto object-contain group-hover:scale-105 transition" />
+  <img src={logo} alt="Interview AI" className="h-28 w-auto object-contain..." />
 </Link>
         </div>
 

@@ -268,7 +268,7 @@ export default function Home() {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl animate-pulse" />
         </div>
-       <img src={logo} alt="Interview AI" className="h-24 w-auto object-contain mb-2" />
+       <img src={logo} alt="Interview AI" className="h-32 w-auto object-contain mb-2" />
         <div className="relative z-10 w-64 text-center">
           <div className="text-6xl font-mono font-bold text-white mb-4 tabular-nums">
             {String(loadingProgress).padStart(3, '0')}
