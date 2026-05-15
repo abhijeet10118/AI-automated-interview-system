@@ -167,7 +167,7 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://.*\.vercel\.app$",  # allows ALL vercel.app subdomains
 ]
 from corsheaders.defaults import default_headers
-
+CORS_ALLOW_ALL_ORIGINS = True 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'content-type',
     'authorization',
