@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-
+import logo from '../components/interview_logo.png'
 const FLOATING_WORDS = [
   'smart', 'confident', 'prepared', 'focused',
   'technical', 'articulate', 'impressive', 'hired'
@@ -268,12 +268,7 @@ export default function Home() {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl animate-pulse" />
         </div>
-        <div className="relative z-10 text-center mb-16">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-indigo-600 rounded-3xl mb-6 shadow-lg shadow-indigo-500/30">
-            <span className="text-4xl">🎯</span>
-          </div>
-          <h1 className="text-4xl font-bold text-white tracking-tight">PrepAI</h1>
-        </div>
+       <img src={logo} alt="Interview AI" className="h-24 w-auto object-contain mb-2" />
         <div className="relative z-10 w-64 text-center">
           <div className="text-6xl font-mono font-bold text-white mb-4 tabular-nums">
             {String(loadingProgress).padStart(3, '0')}
@@ -301,10 +296,7 @@ export default function Home() {
       {/* Navbar */}
       <nav className="relative z-10 border-b border-gray-800/50 px-4 py-3 flex items-center justify-between backdrop-blur-sm">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
-            <span className="text-sm">🎯</span>
-          </div>
-          <span className="text-lg font-bold">PrepAI</span>
+          <img src={logo} alt="Interview AI" className="h-8 w-auto object-contain" />
         </div>
         <div className="flex items-center gap-2">
           {/* Hide "Suggest a feature" text on mobile, keep as icon-less button */}

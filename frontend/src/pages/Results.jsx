@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import api from '../api/axios'
 import StarBackground from '../components/StarBackground'
 import GlassCard from '../components/GlassCard'
-
+import logo from '../components/interview_logo.png'
 export default function Results() {
   const { id } = useParams()
   const [interview, setInterview] = useState(null)
@@ -36,14 +36,15 @@ export default function Results() {
     return '#ef4444'
   }
 
-  if (loading) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #0a0a1a, #0d1b3e, #1a0a2e)' }}>
-      <div className="text-center">
-        <div className="text-5xl mb-4 animate-pulse">📊</div>
-        <p style={{ color: 'rgba(255,255,255,0.4)' }}>Loading results...</p>
-      </div>
+ if (loading) return (
+  <div className="min-h-screen flex items-center justify-center"
+    style={{ background: 'linear-gradient(135deg, #0a0a1a, #0d1b3e, #1a0a2e)' }}>
+    <div className="flex flex-col items-center justify-center gap-4">
+      <img src={logo} alt="Interview AI" className="h-24 w-auto object-contain animate-pulse" />
+      <p className="text-sm" style={{ color: 'rgba(255,255,255,0.4)' }}>Loading results...</p>
     </div>
-  )
+  </div>
+)
 
   const overall = avgScore(interview.responses)
   const scored = interview.responses.filter(r => r.clarity_score)
@@ -59,7 +60,7 @@ export default function Results() {
         style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}>
-            <span className="text-sm">🎯</span>
+            <img src={logo} alt="Interview AI" className="h-8 w-auto object-contain" />
           </div>
           <span className="font-bold text-white">PrepAI</span>
         </div>

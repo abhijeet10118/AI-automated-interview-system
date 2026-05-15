@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-
+import Logo from './Logo'
 export default function Navbar({ showNew = true }) {
   const { logout } = useAuth()
   const navigate = useNavigate()
@@ -13,13 +13,7 @@ export default function Navbar({ showNew = true }) {
         borderBottom: '1px solid rgba(255,255,255,0.06)',
       }}
     >
-      <Link to="/" className="flex items-center gap-2 group flex-shrink-0">
-        <div className="w-8 h-8 rounded-lg flex items-center justify-center group-hover:scale-105 transition"
-          style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}>
-          <span className="text-sm">🎯</span>
-        </div>
-        <span className="font-bold text-white">PrepAI</span>
-      </Link>
+     <Logo size="sm" linkTo="/" />
 
       <div className="flex items-center gap-2 sm:gap-3">
         {showNew && (

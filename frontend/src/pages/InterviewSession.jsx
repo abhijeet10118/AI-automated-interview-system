@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import api from '../api/axios'
 import StarBackground from '../components/StarBackground'
 import GlassCard from '../components/GlassCard'
-
+import logo from '../components/interview_logo.png'
 export default function InterviewSession() {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -112,12 +112,13 @@ export default function InterviewSession() {
   const progress = questions.length ? (currentIndex / questions.length) * 100 : 0
   const timerRed = timeLeft <= 30
 
-  if (loading) return (
-    <div className="min-h-screen flex items-center justify-center"
-      style={{ background: 'linear-gradient(135deg, #0a0a1a, #0d1b3e, #1a0a2e)' }}>
-      <div className="text-center">
-        <div className="text-5xl mb-4 animate-pulse">🎯</div>
-        <p style={{ color: 'rgba(255,255,255,0.4)' }}>Loading your interview...</p>
+ if (loading) return (
+  <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #0a0a1a, #0d1b3e, #1a0a2e)' }}>
+    <div className="flex flex-col items-center justify-center gap-4">
+       <div className="flex flex-col items-center justify-center gap-4">
+  <img src={logo} alt="Interview AI" className="h-24 w-auto object-contain animate-pulse" />
+  <p className="text-sm" style={{ color: 'rgba(255,255,255,0.4)' }}>Loading your interview...</p>
+</div>
       </div>
     </div>
   )
@@ -143,13 +144,7 @@ export default function InterviewSession() {
       >
         {/* Left: logo + role (role truncates gracefully) */}
         <div className="flex items-center gap-2 min-w-0">
-          <div
-            className="w-7 h-7 flex-shrink-0 rounded-lg flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
-          >
-            <span className="text-xs">🎯</span>
-          </div>
-          <span className="font-bold text-white text-sm flex-shrink-0">PrepAI</span>
+          <img src={logo} alt="Interview AI" className="h-7 w-auto object-contain" />
           {interview?.question_set?.role && (
             <>
               <span className="flex-shrink-0" style={{ color: 'rgba(255,255,255,0.2)' }}>·</span>

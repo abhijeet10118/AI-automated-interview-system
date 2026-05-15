@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import api from '../api/axios'
-
+import logo from '../components/interview_logo.png'
 function StarBackground() {
   const canvasRef = useRef(null)
 
@@ -90,15 +90,9 @@ export default function Login() {
 
         {/* Logo — tighter on mobile */}
         <div className="text-center mb-5 sm:mb-8">
-          <Link to="/home" className="inline-flex flex-col items-center group">
-            <div
-              className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mb-2 sm:mb-3 shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition"
-              style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
-            >
-              <span className="text-2xl sm:text-3xl">🎯</span>
-            </div>
-            <span className="text-xl sm:text-2xl font-bold text-white tracking-tight">PrepAI</span>
-          </Link>
+          <Link to="/home" className="inline-flex items-center justify-center group">
+  <img src={logo} alt="Interview AI" className="h-20 w-auto object-contain group-hover:scale-105 transition" />
+</Link>
         </div>
 
         {/* Glass card — tighter padding on mobile */}
