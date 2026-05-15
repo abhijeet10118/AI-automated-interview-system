@@ -13,32 +13,38 @@ class RegisterView(APIView):
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
-            # Save user but inactive until verified
             user = serializer.save()
             user.is_active = False
             user.save()
 
-            # Generate and send OTP
             otp = user.generate_otp()
-            send_mail(
-                subject='Your PrepAI Verification Code',
-                message=f'''Hi {user.username},
+            try:
+                send_mail(
+                    subject='Your PrepAI Verification Code',
+                    message=f'''Hi {user.username},
 
 Your verification code is: {otp}
 
 This code expires in 10 minutes.
 
 Welcome to PrepAI!''',
-                from_email=None,
-                recipient_list=[user.email],
-                fail_silently=False,
-            )
+                    from_email=None,
+                    recipient_list=[user.email],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                # Delete user if email fails so they can try again
+                user.delete()
+                return Response(
+                    {'error': f'Failed to send email: {str(e)}'},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
             return Response(
                 {'message': 'OTP sent to your email', 'email': user.email},
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class VerifyOTPView(APIView):
     permission_classes = [AllowAny]
