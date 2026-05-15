@@ -2,13 +2,12 @@ import { Link } from 'react-router-dom'
 import logo from './interview_logo.png'
 
 export default function Logo({ size = 'md', linkTo = '/' }) {
-  const sizes = {
-  sm: 'h-12',   // was h-8
-  md: 'h-14',   // was h-10
-  lg: 'h-20',   // was h-14
-  xl: 'h-28',   // was h-20
+const sizes = {
+  sm: 'h-14',
+  md: 'h-16',
+  lg: 'h-24',
+  xl: 'h-32',
 }
-
   return (
     <Link to={linkTo} className="inline-flex items-center group">
       <img

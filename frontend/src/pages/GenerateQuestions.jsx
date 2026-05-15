@@ -91,7 +91,7 @@ export default function GenerateQuestions() {
         {/* Navbar */}
         <nav className="px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
           <Link to="/" className="flex items-center gap-2 flex-shrink-0">
-            <img src={logo} alt="Interview AI" className="h-8 w-auto object-contain" />
+            <img src={logo} alt="Interview AI" className="h-12 w-auto object-contain"/>
           </Link>
           <Link to="/" className="text-sm transition px-3 py-2 rounded-xl whitespace-nowrap" style={{ color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.08)' }}>
             ← Dashboard

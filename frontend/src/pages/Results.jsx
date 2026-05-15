@@ -62,7 +62,7 @@ export default function Results() {
         style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}>
-            <img src={logo} alt="Interview AI" className="h-8 w-auto object-contain" />
+            <img src={logo} alt="Interview AI" className="h-12 w-auto object-contain" />
           </div>
           <span className="font-bold text-white">PrepAI</span>
         </div>

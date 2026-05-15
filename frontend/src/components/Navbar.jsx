@@ -13,7 +13,7 @@ export default function Navbar({ showNew = true }) {
         borderBottom: '1px solid rgba(255,255,255,0.06)',
       }}
     >
-     <Logo size="sm" linkTo="/" />
+     <Logo size="md" linkTo="/" />
 
       <div className="flex items-center gap-2 sm:gap-3">
         {showNew && (
