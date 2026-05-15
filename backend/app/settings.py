@@ -159,6 +159,8 @@ SIMPLE_JWT = {
 }
 # CORS — allow React frontend
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = ['*']
+CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
 
 # Email config
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -176,14 +178,14 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Whitenoise for serving static files
-MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Security for production
 ALLOWED_HOSTS = ['*']  # we'll tighten this after deployment
 
 # CORS for production — update after you get your Vercel URL
-CORS_ALLOW_ALL_ORIGINS = True
+
 
 
 
