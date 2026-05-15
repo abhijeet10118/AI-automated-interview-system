@@ -4,6 +4,8 @@ import api from '../api/axios'
 import StarBackground from '../components/StarBackground'
 import GlassCard from '../components/GlassCard'
 import logo from '../components/interview_logo.png'
+
+
 export default function Results() {
   const { id } = useParams()
   const [interview, setInterview] = useState(null)

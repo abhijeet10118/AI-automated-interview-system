@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import api from '../api/axios'
+import emailjs from '@emailjs/browser'
 import logo from '../components/interview_logo.png'
+const EMAILJS_SERVICE_ID = 'service_qfgcs0s'   // replace
+const EMAILJS_TEMPLATE_ID = 'template_yt13m1t' // replace
+const EMAILJS_PUBLIC_KEY = 'eD9tJnPkLHG76T_Y1'   // replace
 function StarBackground() {
   const canvasRef = useRef(null)
 
@@ -62,28 +66,41 @@ export default function Register() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  const handleRegister = async (e) => {
-    e.preventDefault()
-    if (form.password.length < 8) {
-      setError('Password must be at least 8 characters')
-      return
-    }
-    setLoading(true)
-    setError('')
-    try {
-      await api.post('/users/register/', form)
-      setStep('verify')
-    } catch (err) {
-      setError(
-        err.response?.data?.password?.[0] ||
-        err.response?.data?.email?.[0] ||
-        err.response?.data?.username?.[0] ||
-        'Registration failed'
-      )
-    } finally {
-      setLoading(false)
-    }
+ const handleRegister = async (e) => {
+  e.preventDefault()
+  if (form.password.length < 8) {
+    setError('Password must be at least 8 characters')
+    return
   }
+  setLoading(true)
+  setError('')
+  try {
+    const res = await api.post('/users/register/', form)
+    const { email, username, otp } = res.data
+
+    // Send OTP email via EmailJS
+    await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        to_email: email,
+        to_name: username,
+        otp: otp,
+      },
+      EMAILJS_PUBLIC_KEY
+    )
+
+    setStep('verify')
+  } catch (err) {
+    setError(
+      err.response?.data?.email?.[0] ||
+      err.response?.data?.username?.[0] ||
+      'Registration failed'
+    )
+  } finally {
+    setLoading(false)
+  }
+}
 
   const handleVerify = async (e) => {
     e.preventDefault()
@@ -101,13 +118,28 @@ export default function Register() {
   }
 
   const handleResend = async () => {
-    setError('')
-    try {
-      await api.post('/users/resend-otp/', { email: form.email })
-      setMessage('New OTP sent!')
-      setTimeout(() => setMessage(''), 3000)
-    } catch { setError('Failed to resend OTP') }
+  setError('')
+  try {
+    const res = await api.post('/users/resend-otp/', { email: form.email })
+    const { email, username, otp } = res.data
+
+    await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        to_email: email,
+        to_name: username,
+        otp: otp,
+      },
+      EMAILJS_PUBLIC_KEY
+    )
+
+    setMessage('New OTP sent to your email!')
+    setTimeout(() => setMessage(''), 3000)
+  } catch {
+    setError('Failed to resend OTP')
   }
+}
 
   return (
     <div
